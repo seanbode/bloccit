@@ -26,5 +26,11 @@
      letters.shuffle!
      letters[0,rand(3..8)].join
    end
+ 
+   def self.random_number
+      number = (1..9).to_a
+      number.shuffle!
+      number[0,rand(3..8)].join
+   end
  end
  

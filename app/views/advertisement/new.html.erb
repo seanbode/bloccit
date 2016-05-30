@@ -1,0 +1,38 @@
+<h1>Advertisement#new</h1>
+<p>Find me in app/views/advertisement/new.html.erb</p>
+
+<h1>New Advertisement</h1>
+ 
+ <div class="row">
+   <div class="col-md-4">
+     <p>Thank You for supporting Bloccit!</p>
+     <p>Guidelines for Purchasing Ad Space</p>
+     <ul>
+       <li>price is by advert. Each additional advert requires a separate charge.</li>
+       <li>Don't use the letter "A".</li>
+       <li></li>
+     </ul>
+   </div>
+   <div class="col-md-8">
+     <%= form_for @advertisement do |f| %>
+       <div class="form-group">
+         <%= f.label :title %>
+         <%= f.text_field :title, class: 'form-control', placeholder: "Enter advertisement title" %>
+       </div>
+       <div class="form-group">
+         <%= f.label :body %>
+         <%= f.text_area :body, rows: 8, class: 'form-control', placeholder: "Enter advertisement body" %>
+       </div>
+       <div class="form-group">
+			<%= f.label :price %>
+			<%= f.number_field :price, class: 'form-control', placeholder: "Enter Price" %>
+		</div>
+       <div class="form-group">
+         <%= f.submit "Save", class: 'btn btn-success' %>
+       </div>
+     <% end %>
+   </div>
+ </div>
+
+<%-# after ln 25 I should probably add a div in line with the previous "form-group" class. Best banner sizes are: 336x280 large rectangle, the 300x250 medium rectangle, the 728x90 leaderboard, the 300x600 half page, and on mobile the 320x100 large mobile banner. but then again how do I create a price to banner dynamic? How do I  -%>
+       
