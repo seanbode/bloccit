@@ -1,4 +1,4 @@
-class AdvertisementController < ApplicationController
+class AdvertisementsController < ApplicationController
   def index
   	@advertisements = Advertisement.all
   end
@@ -16,7 +16,7 @@ class AdvertisementController < ApplicationController
   	@advertisement.title = params[:advertisement][:title]
   	@advertisement.body = params[:advertisement][:body]
   	@advertisement.price = params[:advertisement][:price]
-  	if @post.save
+  	if @advertisement.save
   		flash[:notice] = "Advertisement was saved successfully."
   		redirect_to @advertisement
   	else

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe AdvertisementController, type: :controller do
+RSpec.describe AdvertisementsController, type: :controller do
 let(:my_advertisement) { Advertisement.create!(title: RandomData.random_sentence, body: RandomData.random_paragraph, price: RandomData.random_number) }
 
   describe "GET #index" do
@@ -9,9 +9,9 @@ let(:my_advertisement) { Advertisement.create!(title: RandomData.random_sentence
       expect(response).to have_http_status(:success)
     end
 
-    it "assigns [my_post] to @posts" do
+    it "assigns [my_advertisement] to @advertisements" do
       get :index
-      expect(assigns(:posts)).to eq([my_advertisement])
+      expect(assigns(:advertisements)).to eq([my_advertisement])
     end
   end
 
@@ -20,12 +20,12 @@ let(:my_advertisement) { Advertisement.create!(title: RandomData.random_sentence
        get :show, {id: my_advertisement.id}
        expect(response).to have_http_status(:success)
     end
-    
+
     it "renders the #show view" do
        get :show, {id: my_advertisement.id}
        expect(response).to render_template :show
     end
- 
+
     it "assigns my_advertisement to @advertisement" do
        get :show, {id: my_advertisement.id}
        expect(assigns(:advertisement)).to eq(my_advertisement)
@@ -37,7 +37,7 @@ let(:my_advertisement) { Advertisement.create!(title: RandomData.random_sentence
       get :new
       expect(response).to have_http_status(:success)
     end
-  
+
     it "renders the #new view" do
       get :new
       expect(response).to render_template :new
@@ -51,17 +51,17 @@ let(:my_advertisement) { Advertisement.create!(title: RandomData.random_sentence
 
   describe "GET #create" do
     it "increases the number of advertisement by 1" do
-      expect{advertisement :create, advertisement: {title: RandomData.random_sentence, body: RandomData.random_paragraph, price: RandomData.random_number}}.to change(Advertisement,:count).by(1)
+      expect{post :create, advertisement: {title: RandomData.random_sentence, body: RandomData.random_paragraph, price: RandomData.random_number}}.to change(Advertisement,:count).by(1)
     end
 
     it "assigns the new advertisement to @advertisement" do
-      advertisement :create, advertisement: {title: RandomData.random_sentence, body: RandomData.random_paragraph, price: RandomData.random_number}
+      post :create, advertisement: {title: RandomData.random_sentence, body: RandomData.random_paragraph, price: RandomData.random_number}
       expect(assigns(:advertisement)).to eq Advertisement.last
     end
-  
+
     it "redirects to the new advertisement" do
-      advertisement :create, advertisement: {title: RandomData.random_sentence, body: RandomData.random_paragraph, price: RandomData.random_number}
+      post :create, advertisement: {title: RandomData.random_sentence, body: RandomData.random_paragraph, price: RandomData.random_number}
       expect(response).to redirect_to Advertisement.last
-    end 
+    end
   end
 end
