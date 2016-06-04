@@ -1,0 +1,17 @@
+<h1>Questions#update</h1>
+<p>Find me in app/views/questions/update.html.erb</p>
+
+
+<% ## Let's say that @question.validated? is 1:
+#check_box("question", "validated")
+# => <input name="question[validated]" type="hidden" value="0" />
+#    <input checked="checked" type="checkbox" id="question_validated" name="question[validated]" value="1" />
+
+# Let's say that @puppy.gooddog is "no":
+#check_box("puppy", "gooddog", {}, "yes", "no")
+# => <input name="puppy[gooddog]" type="hidden" value="no" />
+#    <input type="checkbox" id="puppy_gooddog" name="puppy[gooddog]" value="yes" />
+
+# check_box("eula", "accepted", { class: 'eula_check' }, "yes", "no")
+# => <input name="eula[accepted]" type="hidden" value="no" />
+#    <input type="checkbox" class="eula_check" id="eula_accepted" name="eula[accepted]" value="yes" /> %>
