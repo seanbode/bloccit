@@ -11,7 +11,6 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20160604234237) do
 
   create_table "answers", force: :cascade do |t|
@@ -23,18 +22,6 @@ ActiveRecord::Schema.define(version: 20160604234237) do
   end
 
   add_index "answers", ["post_id"], name: "index_answers_on_post_id"
-=======
-ActiveRecord::Schema.define(version: 20160525052410) do
-
-  create_table "answers", force: :cascade do |t|
-    t.text     "body"
-    t.integer  "question_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-  end
-
-  add_index "answers", ["question_id"], name: "index_answers_on_question_id"
->>>>>>> a2efc6be526a104e53767a2ccf215aec48023850
 
   create_table "comments", force: :cascade do |t|
     t.text     "body"

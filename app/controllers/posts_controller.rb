@@ -1,16 +1,14 @@
 class PostsController < ApplicationController
-<<<<<<< HEAD
-=======
+  
   def index
   	@posts = Post.all
-  	@posts.each_with_index do |p, i| 
-  		if i % 5 == 0 
+  	@posts.each_with_index do |p, i|
+  		if i % 5 == 0
   			p.title = "SPAM"
   		end
   	end
   end
 
->>>>>>> a2efc6be526a104e53767a2ccf215aec48023850
   def show
   	@post = Post.find(params[:id])
   end
