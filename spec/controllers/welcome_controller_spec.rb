@@ -14,5 +14,4 @@ describe "GET index" do
        expect(response).to render_template("about")
      end
    end
-
 end
