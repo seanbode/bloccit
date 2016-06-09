@@ -35,4 +35,13 @@ RSpec.describe User, type: :model do
       expect(user_with_invalid_email).to_not be_valid
     end
   end
+
+  describe "User Name" do
+    let(:user) { User.create!(name: "john doe", email: "user@bloccit.com", password: "password") }
+
+    it "should capitalize a users name" do
+      expect(user).to have_attributes(name: "John Doe")
+    end
+  end
+
 end
