@@ -20,4 +20,12 @@ class UsersController < ApplicationController
      end
   end
 
+  def confirm
+    #confirm action.  should create a new user from the params hash and set its attributes appropriately. Send the params hash back to the create action in UsersController to save the params to the database after user confirmation. Use a button in the confirm form to achieve this
+    @user = User.new
+    @user.name = params[:user][:name]
+    @user.email = params[:user][:email]
+    @user.password = params[:user][:password]
+    @user.password_confirmation = params[:user][:password_confirmation]
+  end
 end
