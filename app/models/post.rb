@@ -2,6 +2,8 @@ class Post < ActiveRecord::Base
 	has_many :comments, dependent: :destroy
 
   default_scope { order('created_at DESC') }
+  scope :ordered_by_title, -> { order('title DESC') }
+  scope :ordered_by_reverse_created_at, -> { order('created_at ASC') }
 
 	belongs_to :topic
   belongs_to :user
