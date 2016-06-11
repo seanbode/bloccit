@@ -9,6 +9,9 @@
       <br />
       <%= @topic.description %>
     </p>
+    <% if current_user %>
+      <%= render 'comments/form', comment: Comment.new, topic: @topic %>
+    <% end %>
     <% @topic.posts.each do |post| %>
       <div class="media">
         <div class="media-body">
