@@ -68,4 +68,11 @@ class TopicsController < ApplicationController
       redirect_to topics_path
     end
   end
+
+  def authorize_moderator
+    unless current_user.moderator?
+      flash[:alert] = "You must be an admin or moderator to do that."
+      redirect_to topics_path
+    end
+  end
 end
