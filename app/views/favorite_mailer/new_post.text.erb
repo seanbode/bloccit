@@ -1,8 +1,1 @@
-New comment to "<%= @post.title %>"
-<%= "=" * (@post.title.length + 12) %>
-
-By: <%= @comment.user.name %>
-
-<%= @comment.body %>
-
-Visit online at: <%= topic_post_url(@post.topic, @post, anchor: "comment-#{@comment.id}") %>
+You're now following "<%= @post.title %>". We'll send you emails with new comments! If you'd like to change that visit us at: <%= link_to "post", topic_post_url(@post.topic, @post) %>
