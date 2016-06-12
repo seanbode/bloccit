@@ -6,6 +6,7 @@ class Post < ActiveRecord::Base
   has_many :labels, through: :labelings
 
   default_scope { order('rank DESC') }
+  scope :visible_to, -> (user) { user ? all : joins(:topic).where('topics.public' => true) }
 
 	belongs_to :topic
   belongs_to :user
