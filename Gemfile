@@ -32,3 +32,5 @@ end
   gem 'turbolinks'
   # Used for encrypting User passwords
   gem 'bcrypt'
+  # Used for holding Environmental specific keys
+  gem 'figaro', '1.0'
