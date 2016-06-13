@@ -27,4 +27,10 @@ class User < ActiveRecord::Base
     gravatar_id = Digest::MD5::hexdigest(self.email).downcase
     "http://gravatar.com/avatar/#{gravatar_id}.png?s=#{size}"
   end
+
+  def submissions
+    if user.posts == nil && user.comments == nil
+      "#{user.name} has no comments or posts submitted yet."
+    end
+  end
 end

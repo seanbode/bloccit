@@ -18,6 +18,13 @@
     </div>
   </div>
 </div>
+<h2>Favorite Comments</h2>
+<div>
+  <small>
+    <% pluralize(@user.favorite.post, 'post', @user.avatar_url(48), post.votes.count, post.comments.count ) %> 
+    <!-- favorite post, author's Gravatar, number of votes, number of comments -->
+  </small>
+</div>
 
 <h2>Posts</h2>
 <%= render @user.posts %>
