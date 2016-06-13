@@ -18,7 +18,6 @@ require 'random_data'
 end
 users = User.all
 
-
 # Create Topics
 50.times do
   Topic.create!(
