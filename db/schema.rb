@@ -13,11 +13,6 @@
 
 ActiveRecord::Schema.define(version: 20160613223319) do
 
-  create_table "comment_topic", id: false, force: :cascade do |t|
-    t.integer "comment_id"
-    t.integer "topic_id"
-  end
-
   create_table "comments", force: :cascade do |t|
     t.text     "body"
     t.integer  "post_id"
