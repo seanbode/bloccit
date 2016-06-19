@@ -26,17 +26,17 @@ class Api::V1::PostsController < Api::V1::BaseController
   end
 
   def create # running into errors. not creating. curl not functioning either.
-    topic = Topic.find(params[:topic_id]) # finds an existing topic to reference for post.
-    post = topic.posts.build(post_params) #
+    topic = Topic.find(params[:topic_id]) 
+    post = topic.posts.build(post_params)
     post = Post.new(post_params)
-    #post.user = @current_user
+    @current_user = post.user
 
-#    if post.user == @current_user #post.valid? # how do I render this true
+    if post.user == @current_user #post.valid? # how do I render this true
     post.save
     render json: post.to_json, status: 201 #why is this not succeeding
-#    else
-#      render json: {error: "Post is invalid", status: 400}, status: 400
-#    end
+    else
+      render json: {error: "Post is invalid", status: 400}, status: 400
+    end
   end
 
   def destroy
