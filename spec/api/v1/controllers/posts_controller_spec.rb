@@ -7,10 +7,9 @@ RSpec.describe Api::V1::PostsController, type: :controller do
   let(:my_comment) { Comment.create!(body: RandomData.random_paragraph, post: my_post, user: my_user) }
 
   context "unauthenticated user" do
-=begin
     #INDEX
     it "GET index return http success" do
-      get :index
+      get :index, topic_id: my_topic.id
       expect(response).to have_http_status(:success)
     end
 
@@ -26,7 +25,7 @@ RSpec.describe Api::V1::PostsController, type: :controller do
       response_hash = JSON.parse response.body
       expect(response_hash['comments']).to_not be_nil
     end
-=end
+
     #UPDATE
     it "PUT update returns http unauthenticated" do #functional
       put :update, topic_id: my_topic.id, id: my_post.id, post: {title: "Post Title", body: "Post Body"}
@@ -50,10 +49,10 @@ RSpec.describe Api::V1::PostsController, type: :controller do
     before do
       controller.request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Token.encode_credentials(my_user.auth_token)
     end
-=begin
+
     #INDEX
     it "GET index return http success" do
-      get :index
+      get :index, topic_id: my_topic.id
       expect(response).to have_http_status(:success)
     end
 
@@ -69,7 +68,7 @@ RSpec.describe Api::V1::PostsController, type: :controller do
       response_hash = JSON.parse response.body
       expect(response_hash['comments']).to_not be_nil
     end
-=end
+
     #UPDATE
     it "PUT update returns http forbidden" do #functional
       put :update, topic_id: my_topic.id, id: my_post.id, post: {title: "Post Title", body: "Post Body"}

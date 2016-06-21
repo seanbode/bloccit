@@ -25,7 +25,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :users, only: [:index, :show, :create, :update]
       resources :topics, except: [:edit, :new] do
-        resources :posts, only: [:create, :update, :destroy]
+        resources :posts
       end
     end
   end

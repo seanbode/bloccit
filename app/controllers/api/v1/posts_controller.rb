@@ -2,10 +2,9 @@ class Api::V1::PostsController < Api::V1::BaseController
   before_action :authenticate_user, except: [:index, :show]
   before_action :authorize_user, except: [:index, :show]
 
-=begin
   def index
     topic = Topic.find(params[:topic_id])
-    posts = Post.all
+    posts = topic.posts
     render json: posts.to_json, status: 200
   end
 
@@ -13,7 +12,6 @@ class Api::V1::PostsController < Api::V1::BaseController
     post = Post.find(params[:id])
     render json: post.to_json(include: :comments), status: 200
   end
-=end
 
   def update
     post = Post.find(params[:id])
@@ -28,12 +26,10 @@ class Api::V1::PostsController < Api::V1::BaseController
   def create 
     topic = Topic.find(params[:topic_id])
     post = topic.posts.build(post_params)
-    post = Post.new(post_params)
-    @current_user = post.user
+    post.user = @current_user
 
-    if post.user == @current_user
-    post.save
-    render json: post.to_json, status: 201
+    if post.save
+      render json: post.to_json, status: 201
     else
       render json: {error: "Post is invalid", status: 400}, status: 400
     end
