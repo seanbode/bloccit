@@ -25,13 +25,13 @@ class Api::V1::PostsController < Api::V1::BaseController
     end
   end
 
-  def create 
+  def create
     topic = Topic.find(params[:topic_id])
-    post = topic.posts.build(post_params)
-    post = Post.new(post_params)
-    @current_user = post.user
+    post = topic.posts.build(params.require(:post).permit(:title, :body, :user_id, :public))
+    post.user = @current_user.user_id
+    #@current_user = post.user
 
-    if post.user == @current_user
+    if @current_user.user_id == post.user
     post.save
     render json: post.to_json, status: 201
     else
