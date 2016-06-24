@@ -3,25 +3,22 @@ require 'rails_helper'
 RSpec.describe Api::V1::PostsController, type: :controller do
   let(:my_user) { create(:user) }
   let(:my_topic) { create(:topic) }
-  let(:my_post) { create(:post, topic: my_topic, user: my_user) } # we build post and associate with topic
+  let(:my_post) { create(:post, topic: my_topic, user: my_user) } 
   let(:my_comment) { Comment.create!(body: RandomData.random_paragraph, post: my_post, user: my_user) }
 
   context "unauthenticated user" do
 
-    #UPDATE
-    it "PUT update returns http unauthenticated" do #functional
+    it "PUT update returns http unauthenticated" do
       put :update, topic_id: my_topic.id, id: my_post.id, post: {title: "Post Title", body: "Post Body"}
       expect(response).to have_http_status(401)
     end
 
-    #CREATE
-    it "POST create returns http unauthenticated" do #functional
+    it "POST create returns http unauthenticated" do
       post :create, topic_id: my_topic.id, post: {title: "Post Title", body: "Post Body"}
       expect(response).to have_http_status(401)
     end
 
-    #DELETE/DESTROY
-    it "DELETE destroy returns http unauthenticated" do #functional
+    it "DELETE destroy returns http unauthenticated" do
       delete :destroy, topic_id: my_topic.id, id: my_post.id
       expect(response).to have_http_status(401)
     end
