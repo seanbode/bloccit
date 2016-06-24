@@ -3,30 +3,11 @@ require 'rails_helper'
 RSpec.describe Api::V1::PostsController, type: :controller do
   let(:my_user) { create(:user) }
   let(:my_topic) { create(:topic) }
-  let(:my_post) { create(:post, topic: my_topic) } # we build post and associate with topic
+  let(:my_post) { create(:post, topic: my_topic, user: my_user) } # we build post and associate with topic
   let(:my_comment) { Comment.create!(body: RandomData.random_paragraph, post: my_post, user: my_user) }
 
   context "unauthenticated user" do
-=begin
-    #INDEX
-    it "GET index return http success" do
-      get :index
-      expect(response).to have_http_status(:success)
-    end
 
-    #SHOW
-    it "GET show returns http success" do
-      get :show, topic_id: my_topic.id, id: my_post.id
-      expect(response).to have_http_status(:success)
-    end
-
-    #SHOW children
-    it "GET show returns child comments" do
-      get :show, topic_id: my_topic.id, id: my_post.id
-      response_hash = JSON.parse response.body
-      expect(response_hash['comments']).to_not be_nil
-    end
-=end
     #UPDATE
     it "PUT update returns http unauthenticated" do #functional
       put :update, topic_id: my_topic.id, id: my_post.id, post: {title: "Post Title", body: "Post Body"}
@@ -50,26 +31,7 @@ RSpec.describe Api::V1::PostsController, type: :controller do
     before do
       controller.request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Token.encode_credentials(my_user.auth_token)
     end
-=begin
-    #INDEX
-    it "GET index return http success" do
-      get :index
-      expect(response).to have_http_status(:success)
-    end
 
-    #SHOW
-    it "GET show returns http success" do
-      get :show, topic_id: my_topic.id, id: my_post.id
-      expect(response).to have_http_status(:success)
-    end
-
-    #SHOW children
-    it "GET show returns child comments" do
-      get :show, topic_id: my_topic.id, id: my_post.id
-      response_hash = JSON.parse response.body
-      expect(response_hash['comments']).to_not be_nil
-    end
-=end
     #UPDATE
     it "PUT update returns http forbidden" do #functional
       put :update, topic_id: my_topic.id, id: my_post.id, post: {title: "Post Title", body: "Post Body"}
@@ -118,8 +80,7 @@ RSpec.describe Api::V1::PostsController, type: :controller do
     #CREATE
     describe "POST create" do
       before do
-
-        post :create, topic_id: my_topic.id, post: {title: my_post.title, body: my_post.body, topic: my_topic}
+        post :create, topic_id: my_topic.id, user_id: my_user.id, post: {title: my_post.title, body: my_post.body, topic: my_topic, user: my_user}
       end
 
       it "returns http success" do#error

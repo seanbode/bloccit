@@ -19,6 +19,7 @@ class PostsController < ApplicationController
     @topic = Topic.find(params[:topic_id])
     @post = @topic.posts.build(post_params)
     @post.user = current_user
+    
   	if @post.save!
       @post.labels = Label.update_labels(params[:post][:labels])
       flash[:notice] = "Post was saved successfully."
