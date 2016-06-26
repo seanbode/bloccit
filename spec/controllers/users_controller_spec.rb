@@ -2,15 +2,14 @@ require 'rails_helper'
 
 RSpec.describe UsersController, type: :controller do
   let(:new_user_attributes) do
-    {
+      {
       name: "BlocHead",
       email: "blochead@bloc.io",
       password: "blochead",
       password_confirmation: "blochead"
-    }
+      }
   end
 
-   #GET is the command for New
   describe "GET new" do
     it "returns http success" do
       get :new
@@ -23,7 +22,6 @@ RSpec.describe UsersController, type: :controller do
     end
   end
 
-  #POST is the command for Create
   describe "POST create" do
     it "returns an http redirect" do
       post :create, user: new_user_attributes
@@ -57,7 +55,6 @@ RSpec.describe UsersController, type: :controller do
     end
   end
 
-  #c45 Public Profiles
   describe "not signed in" do
     let(:factory_user) { create(:user) }
 

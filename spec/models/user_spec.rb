@@ -7,17 +7,14 @@ RSpec.describe User, type: :model do
   it { is_expected.to have_many(:comments) }
   it { is_expected.to have_many(:votes) }
   it { is_expected.to have_many(:favorites) }
-  # tests for name
   it { is_expected.to validate_presence_of(:name) }
   it { is_expected.to validate_length_of(:name).is_at_least(1) }
 
-  # tests for email
   it { is_expected.to validate_presence_of(:email) }
   it { is_expected.to validate_uniqueness_of(:email) }
   it { is_expected.to validate_length_of(:email).is_at_least(3) }
   it { is_expected.to allow_value("user@bloccit.com").for(:email) }
 
-  # tests for password
   it { is_expected.to validate_presence_of(:password) }
   it { is_expected.to have_secure_password }
   it { is_expected.to validate_length_of(:password).is_at_least(6) }
@@ -39,26 +36,24 @@ RSpec.describe User, type: :model do
     it "should be an invalid user due to blank email" do
       expect(user_with_invalid_email).to_not be_valid
     end
+
+    it "responds to role" do
+      expect(user).to respond_to(:role)
+    end
+
+    it "responds to admin?" do
+      expect(user).to respond_to(:admin?)
+    end
+
+    it "responds to member?" do
+      expect(user).to respond_to(:member?)
+    end
   end
 
-  it "responds to role" do
-    expect(user).to respond_to(:role)
-  end
-
-  it "responds to admin?" do
-    expect(user).to respond_to(:admin?)
-  end
-
-  it "responds to member?" do
-    expect(user).to respond_to(:member?)
-  end
-
-  #roles specifically testing admin, member, guest statuses
   describe "roles" do
     it "is member by default" do
       expect(user.role).to eq("member")
     end
-
 
     context "member user" do
       it "returns true for #member?" do
@@ -85,7 +80,6 @@ RSpec.describe User, type: :model do
     end
   end
 
-  #voting
   describe "#favorite_for(post)" do
     before do
       topic = Topic.create!(name: RandomData.random_sentence, description: RandomData.random_paragraph)
@@ -102,7 +96,6 @@ RSpec.describe User, type: :model do
     end
   end
 
-  #gravatar test
   describe ".avatar_url" do
     let(:known_user) { create(:user, email: "blochead@bloc.io") }
 
@@ -112,7 +105,6 @@ RSpec.describe User, type: :model do
     end
   end
 
-  #api tests
   describe "#generate_auth_token" do
     it "creates a token" do
       expect(user.auth_token).to_not be_nil

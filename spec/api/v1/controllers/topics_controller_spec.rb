@@ -15,7 +15,6 @@ RSpec.describe Api::V1::TopicsController, type: :controller do
       expect(response).to have_http_status(:success)
     end
 
-    #Updating, Creating, and Destroying Topics
     it "PUT update returns http unauthenticated" do
       put :update, id: my_topic.id, topic: {name: "Topic Name", description: "Topic Description"}
       expect(response).to have_http_status(401)

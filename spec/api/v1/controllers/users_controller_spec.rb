@@ -14,7 +14,6 @@ RSpec.describe Api::V1::UsersController, type: :controller do
       expect(response).to have_http_status(401)
     end
 
-    #49 send data
     it "PUT update returns http unauthenticated" do
       new_user = build(:user)
       put :update, id: my_user.id, user: { name: new_user.name, email: new_user.email, password: new_user.password }
@@ -43,7 +42,6 @@ RSpec.describe Api::V1::UsersController, type: :controller do
       expect(response).to have_http_status(403)
     end
 
-    #49- send data
     it "PUT update returns http forbidden" do
       new_user = build(:user)
       put :update, id: my_user.id, user: { name: new_user.name, email: new_user.email, password: new_user.password }

@@ -18,7 +18,6 @@ RSpec.describe Topic, type: :model do
     end
   end
 
-  #Checkpoint 46
   describe "scopes" do
     before do
       @public_topic = Topic.create!(name: RandomData.random_sentence, description: RandomData.random_paragraph)
